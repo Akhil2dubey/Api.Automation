@@ -23,6 +23,10 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      checks: write
+      issues: write
 
     steps:
     - uses: actions/checkout@v4
@@ -35,6 +39,7 @@ jobs:
     - name: Excute Tests
       run: mvn clean test -Dsuite=suite -X
     - name: Upload a Build Artifact
+      if: always()
       uses: actions/upload-artifact@v4.6.2
       with: 
         name: logs
